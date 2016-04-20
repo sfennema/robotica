@@ -1,0 +1,39 @@
+package Robotica;
+
+import lejos.hardware.motor.Motor;
+import lejos.robotics.subsumption.Behavior;
+
+public class driveForward implements Behavior {
+
+	private boolean suppressed;
+
+//	public void action() {
+//		suppressed = false;
+//		while (suppressed = false) {
+//			Motor.A.forward();
+//			Motor.D.forward();		}
+//		suppress();
+//	}
+	
+	public void action() {
+	     suppressed = false;
+	     Motor.A.forward();
+	     Motor.C.forward();
+	     while( !suppressed )
+	        Thread.yield();
+	     Motor.A.stop(); // clean up
+	     Motor.C.stop();
+	   }
+
+	@Override
+	public boolean takeControl() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public void suppress() {
+		suppressed = true;
+		
+	}
+}
