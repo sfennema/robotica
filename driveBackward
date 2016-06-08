@@ -14,20 +14,22 @@ public class driveBackward implements Behavior {
 	}
 
 	@Override
-	public void action() {
-		 suppressed = false;
-	     Motor.A.backward();
-	     Motor.C.backward();
-	     while( !suppressed )
-	        Thread.yield();
-	     Motor.A.stop(); // clean up
-	     Motor.C.stop();		
+	public void action(){
+		suppressed = false;
+		Motor.A.backward();
+     		Motor.C.backward();
+		
+		while(!suppressed){	// added {_} for safety reasons
+	        	Thread.yield();
+	        }
+	        
+	     	Motor.A.stop();		// clean up
+     		Motor.C.stop();		
 	}
 
 	@Override
-	public void suppress() {
+	public void suppress(){
 		suppressed = true;
 		
 	}
-
 }
